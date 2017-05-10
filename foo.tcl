@@ -1,5 +1,5 @@
 # location of the dll you compiled with Rust
-load "..../foo.dll"
+load "..../foo.dll" 
 
 # creates two labels and a text entry widget, and packs them to the main window
 # the text entered into the text entry will be stored in variable "friend"
