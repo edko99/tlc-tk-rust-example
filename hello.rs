@@ -20,7 +20,7 @@ pub type Tcl_CmdProc = extern "C" fn (cd:*mut libc::c_void, interp:*mut libc::c_
 
 #[link(name = "tcl86")]
 extern {
-    pub fn Tcl_EvalEx(interp: *mut libc::c_void, script: *const ::libc::c_char,
+     pub fn Tcl_EvalEx(interp: *mut libc::c_void, script: *const ::libc::c_char,
                       numBytes: ::libc::c_int, flags: ::libc::c_int) -> ::libc::c_int;
     pub fn Tcl_CreateCommand(interp:*mut libc::c_void, cmdName: *const ::libc::c_char,
                              _proc: Tcl_CmdProc, cd:*mut libc::c_void, dp:*mut libc::c_void) -> *mut libc::c_void;
@@ -60,7 +60,7 @@ extern "C" fn myCommand(_:*mut libc::c_void, interp: *mut libc::c_void,
         1: the widget name
         3: who I will greet
         So, if in my Tcl code I write:
-        mycmd .greet World
+        mycmd greet .greet World
         then this will request the Tcl interpreter to execute:
         .greet configure -text {Hello, World!}
         */
@@ -71,9 +71,6 @@ extern "C" fn myCommand(_:*mut libc::c_void, interp: *mut libc::c_void,
             let script = format!("{} configure -text {{Hello, {}!}}", widget, message);
             unsafe { Tcl_EvalEx(interp, script.as_ptr() as *const i8, script.len() as i32, 0); }
         }
-        
-        //let script = format!(".greeting configure -text {{Hello, World!}}");
-        //unsafe { Tcl_EvalEx(interp, script.as_ptr() as *const i8, script.len() as i32, 0); }
     }
     
     0 // This tells Tcl everything ended OK
