@@ -1,3 +1,4 @@
+
 use ::libc;
 use std::{ptr, slice};
 use std::ffi::CStr;
@@ -57,7 +58,8 @@ extern "C" fn myCommand(_:*mut libc::c_void, interp: *mut libc::c_void,
         Implements a "greet" sub-command to place a greeting in a given label widget
         Tcl should send an array of 3 strings:
         0: always the command name; in this case "mycmd"
-        1: the widget name
+        1: the sub-command name; in this case "greet"
+        2: the widget name
         3: who I will greet
         So, if in my Tcl code I write:
         mycmd greet .greet World
